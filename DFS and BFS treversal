@@ -1,0 +1,42 @@
+//DFS
+class Solution {
+    ArrayList<Integer> ans  = new ArrayList<>();
+    public void dfs(int s, boolean[] visited,  ArrayList<ArrayList<Integer>> adj){
+            visited[s] = true;
+            ans.add(s);
+          for(int i = 0; i<adj.get(s).size(); i++){
+              int x = adj.get(s).get(i);
+              if(visited[x]==false){
+                  dfs(x,visited,adj);
+              }
+          }
+    }
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+       boolean[] visited = new boolean[V];
+       dfs(0,visited,adj);
+       return ans;
+    }
+}
+
+//BFS
+class Solution {
+    // Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[V];
+        q.add(0);
+        while(!q.isEmpty()){
+            int v = q.remove();
+            if(visited[v]==false){
+                ans.add(v);
+                visited[v]=true;
+                for(int i = 0; i<adj.get(v).size(); i++){
+                    q.add(adj.get(v).get(i));
+                }
+            }
+            
+        }
+        return ans;
+    }
+}

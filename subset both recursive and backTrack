@@ -1,0 +1,33 @@
+// class Solution {
+//     public List<List<Integer>> subsets(int[] nums) {
+//         //iterative approch 
+//         List<List<Integer>> result = new ArrayList<>();
+//         result.add(new ArrayList<>());
+//         for(int num : nums){//1 2 3
+//                int n = result.size();
+//                for(int i = 0; i<n; i++){
+//                    List<Integer> temp = new ArrayList<>(result.get(i));//at index 0 = []
+//                    temp.add(num);//[1]
+//                    result.add(temp);//[] [1]
+//                }
+//         }
+//         return result;
+//     }
+// }
+//backtracking Approch
+class Solution {
+    public void backTrack(int index,List<List<Integer>> result,int[] nums, List<Integer> curr){
+        result.add(new ArrayList<>(curr));
+         for(int num = index; num<nums.length; num++){
+             curr.add(nums[num]);
+             backTrack(num+1,result,nums,curr);
+             curr.remove(curr.size()-1);
+         }
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        //backtracking approch approch 
+        List<List<Integer>> result = new ArrayList<>();
+        backTrack(0,result,nums,new ArrayList<>());
+        return result;
+    }
+}

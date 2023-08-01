@@ -1,0 +1,19 @@
+class Solution {
+ public void backTrack(int index,List<List<Integer>> result,int n, List<Integer> curr,int k){
+       if(curr.size()==k){
+            result.add(new ArrayList<>(curr));
+            return;
+       }
+         for(int num = index; num<=n; num++){
+             curr.add(num);
+             backTrack(num+1,result,n,curr,k);
+             curr.remove(curr.size()-1);
+         }
+    }
+    public List<List<Integer>> combine(int n, int k) {
+         //backtracking approch approch 
+        List<List<Integer>> result = new ArrayList<>();
+        backTrack(1,result,n,new ArrayList<>(),k);
+        return result;
+    }
+}
